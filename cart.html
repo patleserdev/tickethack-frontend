@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Hack - Home</title>
+    <link href="./assets/cart.css" rel="stylesheet" type="text/css">
+
+    <script src="https://kit.fontawesome.com/db3b8365b0.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div w3-include-html="./includes/header.html"></div>
+
+    <div id="nav">
+        
+    </div>
+    <div id="content">
+
+        <!--
+        <div id="result">
+            <p>No tickets in your cart.</p>
+            <p>Why not plan a trip ?</p>
+        </div>
+        -->
+
+        <div id="cart">
+            <div id="cart-header">
+                <h3>My cart</h3>
+            </div>
+
+            <div id="cart-content">
+            <ul>
+                <li class="cart-element">
+                    <span class="trip">Paris > Lyon</span>
+                    <span class="departureHour">20:09</span>
+                    <span class="price">103€</span>
+                    <span class="deleteOneCart"><i class="fa-solid fa-rectangle-xmark fa-2x"></i></span>
+                </li>
+
+                <li class="cart-element">
+                    <span class="trip">Marseille > Lyon</span>
+                    <span class="departureHour">22:10</span>
+                    <span class="price">127€</span>
+                    <span class="deleteOneCart"><i class="fa-solid fa-rectangle-xmark fa-2x"></i></span>
+                </li>
+
+            </ul>
+            </div>
+
+            <div id="cart-footer">
+                <span>Total : 230€</span>
+                <span><a href="#" id="purchase">Purchase</a></span>
+               
+            </div>
+        </div>
+        
+    </div>
+    <script src="cart.js"></script>
+</body>
+</html>
