@@ -12,7 +12,7 @@ document.querySelector('#search-btn').addEventListener('click',()=> {
         date:dataInput[2].value,
     }
 
-    //Fetch route PSOT trips
+    //Fetch route POST trips
     fetch(`${urlBackend}/trips`, { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -21,6 +21,7 @@ document.querySelector('#search-btn').addEventListener('click',()=> {
     .then(response => response.json())
     .then(tripsdata => {
         //Read result = true
+        console.log(tripsdata .result)
         if(tripsdata .result) {
             //Init #list-trip
             document.querySelector('#list-trip').innerHTML ='';
@@ -32,8 +33,29 @@ document.querySelector('#search-btn').addEventListener('click',()=> {
                 document.querySelector('#list-trip').innerHTML += `
                 <div class="book-row">
                     <p class="description">${element.departure} >   ${element.arrival}  ${objheure}  ${element.price}€</p>
-                    <button id="book-btn" class="button">Book</button>
+                    <button class="button" data-id="${element._id}">Book</button>
                 </div>`
+            }
+            //Add events to #list-trip
+            let bookButtons = document.querySelector('#list-trip').querySelectorAll('.button');
+            for(let i = 0; i < bookButtons.length; i++) {
+                bookButtons[i].addEventListener('click', ()=> {
+                    const tripId = bookButtons[i].dataset.id;
+                    fetch(`${urlBackend}/cart/add`, { 
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({tripId})
+                    })
+                    .then(response => response.json())
+                    .then(cartdata => {
+                        if(!cartdata .result){
+                            document.querySelector('#list-trip').innerHTML = `
+                            <img src="./assets/images/notfound.png" alt="No trip found."/>
+                            <hr class="separator">
+                            <p class="description">No trip found.</p>`
+                        }
+                    })
+                })
             }
         }
         //Read result = false
