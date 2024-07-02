@@ -19,10 +19,12 @@
     padding-right: 25px;
 }
 
-.logo
+.logo a
 {
+text-decoration: none;
 font-size: 1.5em;
 color:#3d9c5a;
+
 }
 
 .links
