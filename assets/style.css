@@ -45,26 +45,27 @@ p {
     background-color: #12cc6f;
     border:0px;
     border-radius: 3%;
-    width:90%;
 }
 
 .book-row {
     display:flex;
-    border-radius: 10%;
+    border-radius: 3%;
     justify-content: space-between;
     align-items: center;
     background-color: beige;
     padding:5px;
     margin:5px 0px;
-    font-size: 0.9em;
     font-weight: bold;
+    width: 95%;
 }
 
 .button {
     background-color: #12cc6f;
     border:0px;
     border-radius: 3%;
-    width:90%;
+    height:30px;
+    width:45px;
+    margin: 5px;
 }
 
 .separator {
@@ -108,7 +109,7 @@ p {
 }
 
 #search-btn {
-    height:30px;
+    width:90%;
 }
 
 #search-date {
@@ -124,10 +125,4 @@ p {
 
 #list-trip > img {
     width: 80%;
-}
-
-#book-btn {
-    height:30px;
-    width:100px;
-    margin: 5px;
 }
