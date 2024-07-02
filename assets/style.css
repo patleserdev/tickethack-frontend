@@ -3,11 +3,6 @@
     padding: 0;
 }
 
-body {
-    background-image: url("./images/background.jpg");
-    background-size: cover;
-}
-
 h1 {
     font-weight: bold;
     font-size: 2em;
@@ -78,9 +73,12 @@ p {
 }
 
 #content {
+    background-image: url("./images/background.jpg");
+    background-size: cover;
+    height:100vh;
     display:flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     padding:2%;
 }
