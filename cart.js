@@ -32,21 +32,25 @@ fetch('./includes/header.html')
 
                 if (data.result == true)
                 {
-                    for(oneCart of data.carts)
-                    {
-                        let theHour=new Date(oneCart.trip.date)
-                        let newCartElement=cartElementPrototype
-                        newCartElement=newCartElement.replace('--departure--',oneCart.trip.departure)
-                        newCartElement=newCartElement.replace('--arrival--',oneCart.trip.arrival)
-                        newCartElement=newCartElement.replace('--departureHour--',theHour.toLocaleTimeString([],{ hour: "2-digit", minute: "2-digit" }))
-                        newCartElement=newCartElement.replace('--price--',oneCart.trip.price)
-                        newCartElement=newCartElement.replace('--cartId--',oneCart.trip._id)
-                        document.querySelector('#cart-content ul').innerHTML +=newCartElement
-                    }
-                   
-                    activeDeleteButtons()
-                    updateTotal()
+                        for(oneCart of data.carts)
+                        {
+                            let theHour=new Date(oneCart.trip.date)
+                            let newCartElement=cartElementPrototype
+                            newCartElement=newCartElement.replace('--departure--',oneCart.trip.departure)
+                            newCartElement=newCartElement.replace('--arrival--',oneCart.trip.arrival)
+                            newCartElement=newCartElement.replace('--departureHour--',theHour.toLocaleTimeString([],{ hour: "2-digit", minute: "2-digit" }))
+                            newCartElement=newCartElement.replace('--price--',oneCart.trip.price)
+                            newCartElement=newCartElement.replace('--cartId--',oneCart.trip._id)
+                            document.querySelector('#cart-content ul').innerHTML +=newCartElement
+                        }
+                       
+                        activeDeleteButtons()
+                        updateTotal()
+                        countElementsinCart()
+                  
+                    
                 }
+               
             })
 
 
@@ -72,6 +76,7 @@ let buttons = document.querySelectorAll('.deleteOneCart')
                     this.parentNode.remove()
                     
                     updateTotal()
+                    countElementsinCart()
                 })
             }
         })
@@ -161,6 +166,7 @@ document.querySelector('#purchase').addEventListener('click',function(e){
         e.preventDefault()
 
         activePurchase()
+        countElementsinCart()
 })
 
 
@@ -186,4 +192,18 @@ function updateTotal()
     }
     
     document.querySelector('#cart-total').innerHTML=`Total : ${total} €`
+}
+
+
+/***
+ *   calcul du total
+ */  
+function countElementsinCart()
+{
+   let elements=document.querySelectorAll('.cart-element')
+   if (elements.length == 0)
+   {
+    document.querySelector('#cart-content').innerHTML ='Nothing in the cart'
+   }
+    
 }
