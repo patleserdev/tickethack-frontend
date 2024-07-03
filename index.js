@@ -37,7 +37,8 @@ document.querySelector('#search-btn').addEventListener('click',()=> {
             //Add trips to #list-trip
             let objheure='';
             for(const element of tripsdata.trips) {
-                objheure = element.date.split('T')[1].split(':')[0] + ":" + element.date.split('T')[1].split(':')[1];
+                //objheure = element.date.split('T')[1].split(':')[0] + ":" + element.date.split('T')[1].split(':')[1];
+                objheure = new Date(element.date).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
                 document.querySelector('#list-trip').innerHTML += `
                 <div class="book-row">
                     <p class="description">${element.departure} >   ${element.arrival}  ${objheure}  ${element.price}€</p>

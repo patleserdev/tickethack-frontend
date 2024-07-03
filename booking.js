@@ -14,15 +14,18 @@ fetch(`${urlBackend}/bookings`)
 .then(response => response.json())
 .then(bookingsdata => {
     const bookings = bookingsdata.bookings;
-    console.log(bookings)
+    /* console.log(new Date().toLocaleDateString())
+    console.log(moment().format("YYYY-MM-DD"));
+    console.log(moment("2024-07-05", "YYYY-MM-DD").fromNow()) */
     if (bookings.length > 0) {
         const booktrips = document.querySelector('#book-trips');
         booktrips.innerHTML =''
         for(const element of bookings) {
-            if (new Date(element.date).toISOString() < new Date().toISOString()) {
+            if (new Date(element.date).toLocaleDateString() < new Date().toLocaleDateString()) {
+                const objdate = moment(moment().format("YYYY-MM-DD"), "YYYY-MM-DD").fromNow();
                 booktrips.innerHTML +=`
                 <div class="book-row">
-                    <p class="description">${element.departure} >   ${element.arrival}  ${objheure}  ${element.price}€ Departure in ${moment().endOf('2024-08-01').fromNow()}</p>
+                    <p class="description">${element.departure} >   ${element.arrival}  ${objheure}  ${element.price}€ Departure in ${objdate}</p>
                 </div>`
             }
         }
