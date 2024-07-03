@@ -2,6 +2,14 @@
 const urlBackend = "https://tickethack-backend-zeta.vercel.app";
 document.querySelector('#search-date').value = new Date().toISOString().split('T')[0]; //Init input date
 
+fetch('./includes/header.html')
+            .then(response => response.text())
+            .then(data => {
+                // Insert the HTML into the div
+                document.getElementById('nav').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading HTML:', error));
+            
 //Event listener bouton Search
 document.querySelector('#search-btn').addEventListener('click',()=> {
     //Reading data departure, arrival and date
