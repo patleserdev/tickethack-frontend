@@ -7,7 +7,7 @@ let cartElementPrototype=`<li class="cart-element" data-id="--cartId--">
 <span class="deleteOneCart"  ><i class="fa-solid fa-rectangle-xmark fa-2x"></i></span>
 </li>`
 
-
+let spinnerPrototype=
 /***
  *  récupère le header 
  */
@@ -21,11 +21,11 @@ fetch('./includes/header.html')
             .catch(error => console.error('Error loading HTML:', error));
             // récupérer le panier en live
 
-
+            
 /***
  *  récupère le panier 
  */
-
+            document.querySelector('#cart-content ul').innerHTML="<div id='spinner'></div>"
             fetch(`${urlBackend}/cart`)
             .then(response => response.json())
             .then((data) => {
@@ -34,7 +34,7 @@ fetch('./includes/header.html')
                 if (data.result == true)
                 {
                     data.carts=data.carts.sort((a, b) => new Date(a.trip.date) - new Date(b.trip.date))
-
+                    document.querySelector('#spinner').remove()
                         for(oneCart of data.carts)
                         {
                             let theHour=new Date(oneCart.trip.date)

@@ -57,6 +57,7 @@
 }
 
 #book-trips {
+    position:relative;
     background-color: white;
     min-height:20vh;
     width: 30vw;
@@ -73,4 +74,30 @@
 #book-trips > p {
     color:#3d9c5a;
     font-weight: bold;
+}
+
+
+#spinner
+{
+    position:absolute;
+    transform: translate(-50%,-50%);
+    left:47%;
+    top:45%;
+    height: 100px;
+    width:100px;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 50%;
+    border:16px outset #3d9c5a;
+    animation:animate 1s linear infinite
+}
+
+@keyframes animate
+{
+    from{
+    transform: rotate(0deg);
+    }
+    to
+    {
+    transform: rotate(360deg);
+    }
 }

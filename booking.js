@@ -10,6 +10,7 @@ fetch('./includes/header.html')
             .catch(error => console.error('Error loading HTML:', error));
             
 //Chargement liste booking
+document.querySelector('#content').innerHTML+="<div id='spinner'></div>"
 fetch(`${urlBackend}/bookings`)
 .then(response => response.json())
 .then(bookingsdata => {
@@ -18,8 +19,9 @@ fetch(`${urlBackend}/bookings`)
     /* console.log(new Date().toLocaleDateString())
     console.log(moment().format("YYYY-MM-DD"));
     console.log(moment("2024-07-05", "YYYY-MM-DD").fromNow()) */
+    document.querySelector('#spinner').remove()
     if (bookings.length > 0) {
-        const booktrips = document.querySelector('#book-trips');
+        const booktrips = document.querySelector('#book-trips')
         booktrips.innerHTML =''
         for(const element of bookings) {
             if (new Date(element.trip.date).toLocaleString() >= new Date().toLocaleString()) {
