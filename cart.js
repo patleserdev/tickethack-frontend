@@ -7,6 +7,7 @@ let cartElementPrototype=`<li class="cart-element" data-id="--cartId--">
 <span class="deleteOneCart"  ><i class="fa-solid fa-rectangle-xmark fa-2x"></i></span>
 </li>`
 
+
 /***
  *  récupère le header 
  */
@@ -32,6 +33,8 @@ fetch('./includes/header.html')
 
                 if (data.result == true)
                 {
+                    data.carts=data.carts.sort((a, b) => new Date(a.trip.date) - new Date(b.trip.date))
+
                         for(oneCart of data.carts)
                         {
                             let theHour=new Date(oneCart.trip.date)
