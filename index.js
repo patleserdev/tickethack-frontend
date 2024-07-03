@@ -63,6 +63,10 @@ document.querySelector('#search-btn').addEventListener('click',()=> {
                             <hr class="separator">
                             <p class="description">No trip found.</p>`
                         }
+                        else
+                        {
+                            window.location.assign("cart.html")
+                        }
                     })
                 })
             }
