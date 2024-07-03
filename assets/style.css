@@ -22,7 +22,7 @@ h2 {
 }
 
 p {
-    font-size: 1em;
+    font-size: 0.9em;
 }
 
 .container {
@@ -35,7 +35,7 @@ p {
 .box {
     background-color: white;
     border-radius: 3%;
-    width:15vw;
+    width:17vw;
     height:35vh;
     padding:1.5%;
     overflow:auto;
@@ -55,7 +55,7 @@ p {
     align-items: center;
     background-color: beige;
     padding:5px;
-    margin:5px 0px;
+    margin-top:5px;
     font-weight: bold;
     width: 95%;
 }
@@ -118,11 +118,11 @@ p {
     flex-direction: column;
     justify-content: space-around;
     align-items: left;
-    width: 90%;
+    width: 95%;
 }
 
 #search-btn {
-    width:90%;
+    width:95%;
 }
 
 #search-date {

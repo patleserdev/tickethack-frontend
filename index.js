@@ -41,7 +41,7 @@ document.querySelector('#search-btn').addEventListener('click',()=> {
                 objheure = new Date(element.date).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
                 document.querySelector('#list-trip').innerHTML += `
                 <div class="book-row">
-                    <p class="description">${element.departure} >   ${element.arrival}  ${objheure}  ${element.price}€</p>
+                    <p class="description">${element.departure}     >       ${element.arrival}    ${objheure}     ${element.price}€</p>
                     <button class="button" data-id="${element._id}">Book</button>
                 </div>`
             }
