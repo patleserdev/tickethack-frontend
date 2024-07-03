@@ -21,14 +21,20 @@ fetch(`${urlBackend}/bookings`)
         const booktrips = document.querySelector('#book-trips');
         booktrips.innerHTML =''
         for(const element of bookings) {
-            if (new Date(element.date).toLocaleDateString() < new Date().toLocaleDateString()) {
-                const objdate = moment(moment().format("YYYY-MM-DD"), "YYYY-MM-DD").fromNow();
+            //if (new Date(element.trip.date).toLocaleString() <= new Date().toLocaleString()) {
+                const objdate = moment(element.trip.date).fromNow();
+                const objheure = new Date(element.trip.date).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});
                 booktrips.innerHTML +=`
                 <div class="book-row">
-                    <p class="description">${element.departure} >   ${element.arrival}  ${objheure}  ${element.price}€ Departure in ${objdate}</p>
+                    <p>${element.trip.departure} >   ${element.trip.arrival}</p>
+                    <p>${objheure}</p>
+                    <p>${element.trip.price}€</p>
+                    <p>Departure ${objdate}</p>
                 </div>`
-            }
+            //}
         }
+        booktrips.innerHTML +=`<hr class="separator">
+        <p class="description">Enjoy your travels with Tickethack!</p>`
     }
 }
 )
