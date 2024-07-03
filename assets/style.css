@@ -39,6 +39,8 @@ p {
     width:25%;
     height:35vh;
     padding:1.5%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px grey;
     
 }
 
