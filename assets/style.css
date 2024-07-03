@@ -69,6 +69,15 @@ p {
     margin: 5px;
 }
 
+.button:hover {
+    cursor:pointer;
+}
+
+.button:active {
+    background-color: rgb(168, 166, 166);
+    border:1px solid blue;
+}
+
 .separator {
     width: 90%;
     border-top: 4px solid #3d9c5a;
