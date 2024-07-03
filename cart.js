@@ -148,6 +148,7 @@ function activePurchase()
                     } 
                        
                     updateTotal()
+                    window.location.assign("booking.html")
                 })
                    }
 
