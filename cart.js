@@ -113,25 +113,32 @@ function activePurchase()
 
         //         })
         // }
+      
+
         tripIds=[]
         for(let element of cartElements)
         {
-            tripIds.push(element.dataset.id)
-        }
+            tripIds.push({trip : element.dataset.id})
+        }  
+            //fetch(`http://localhost:3000/bookings/addMany`, { 
             fetch(`${urlBackend}/bookings/addMany`, { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({tripIds})})
+                body: JSON.stringify({tripIds : tripIds})})
                 .then(response => response.json())
                 .then((data) => {
+                    console.log(data)
                    if (data.result == true)
                    {
                 fetch(`${urlBackend}/cart/deleteall`, { method: 'DELETE' })
                 .then(response => response.json())
                 .then((data) => {
-                    
-                    element.remove()
-                    
+                    console.log(data)
+                    for(let element of cartElements)
+                    {
+                        element.remove()
+                    } 
+                       
                     updateTotal()
                 })
                    }
