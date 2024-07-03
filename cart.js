@@ -1,10 +1,10 @@
 const urlBackend = "https://tickethack-backend-zeta.vercel.app";
 
-let cartElementPrototype=`<li class="cart-element">
+let cartElementPrototype=`<li class="cart-element" data-id="--cartId--">
 <span class="trip"> --departure-- > --arrival-- </span>
 <span class="departureHour">--departureHour--</span>
 <span class="price">--price--€</span>
-<span class="deleteOneCart" data-id="--cartId--" ><i class="fa-solid fa-rectangle-xmark fa-2x"></i></span>
+<span class="deleteOneCart"  ><i class="fa-solid fa-rectangle-xmark fa-2x"></i></span>
 </li>`
 
 /***
@@ -43,7 +43,7 @@ fetch('./includes/header.html')
                         newCartElement=newCartElement.replace('--cartId--',oneCart.trip._id)
                         document.querySelector('#cart-content ul').innerHTML +=newCartElement
                     }
-
+                   
                     activeDeleteButtons()
                     updateTotal()
                 }
@@ -63,14 +63,14 @@ let buttons = document.querySelectorAll('.deleteOneCart')
     {
         button.addEventListener('click',function(){
 
-            console.log(this.dataset.id)
             if ( confirm("Want to delete from cart ?"))
             {     
-                fetch(`${urlBackend}/cart/deleteone/${this.dataset.id}`, { method: 'DELETE' })
+                fetch(`${urlBackend}/cart/deleteone/${this.parentNode.dataset.id}`, { method: 'DELETE' })
                 .then(response => response.json())
                 .then((data) => {
                     console.log(data)
                     this.parentNode.remove()
+                    
                     updateTotal()
                 })
             }
@@ -81,8 +81,85 @@ let buttons = document.querySelectorAll('.deleteOneCart')
 
 
 /***
- *  listner de purchase
+ *  listner de purchase 
  */
+
+//booking/add tripId 
+function activePurchase()
+{
+    
+    if ( confirm("Want to checkout from cart ?"))
+    { 
+        let cartElements= document.querySelectorAll('.cart-element')
+        // for(let element of cartElements)
+        // {
+        //     fetch(`${urlBackend}/bookings/add`, { 
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json' },
+        //         body: JSON.stringify({tripId : element.dataset.id})})
+        //         .then(response => response.json())
+        //         .then((data) => {
+        //            if (data.result == true)
+        //            {
+        //         fetch(`${urlBackend}/cart/deleteall`, { method: 'DELETE' })
+        //         .then(response => response.json())
+        //         .then((data) => {
+                    
+        //             element.remove()
+                    
+        //             updateTotal()
+        //         })
+        //            }
+
+        //         })
+        // }
+        tripIds=[]
+        for(let element of cartElements)
+        {
+            tripIds.push(element.dataset.id)
+        }
+            fetch(`${urlBackend}/bookings/addMany`, { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({tripIds})})
+                .then(response => response.json())
+                .then((data) => {
+                   if (data.result == true)
+                   {
+                fetch(`${urlBackend}/cart/deleteall`, { method: 'DELETE' })
+                .then(response => response.json())
+                .then((data) => {
+                    
+                    element.remove()
+                    
+                    updateTotal()
+                })
+                   }
+
+                })
+        
+
+
+        document.querySelector('#cart-content').innerHTML="Your cart is paied"
+        setTimeout(() => {
+            document.querySelector('#cart-content').innerHTML=""
+          }, "3000");
+
+
+    }
+    
+}
+
+document.querySelector('#purchase').addEventListener('click',function(e){
+        e.preventDefault()
+
+        activePurchase()
+})
+
+
+//deleteall cart
+
+
             
 
 /***
@@ -90,4 +167,16 @@ let buttons = document.querySelectorAll('.deleteOneCart')
  */        
 
 function updateTotal()
-{}
+{
+    let prices=document.querySelectorAll('.price')
+
+    total=0
+    for(let price of prices)
+    {
+        
+        let priceValue=Number(price.textContent.replace('€',''))
+        total+=priceValue
+    }
+    
+    document.querySelector('#cart-total').innerHTML=`Total : ${total} €`
+}
