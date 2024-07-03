@@ -1,0 +1,37 @@
+#nav
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height:7vh;
+
+    padding-left:25px;
+    padding-right: 25px;
+}
+
+.logo a
+{
+text-decoration: none;
+font-size: 1.5em;
+color:#3d9c5a;
+
+}
+
+.links
+{
+padding:50px
+}
+
+.links a
+{
+    margin-right:25px;
+    color:#222;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.links a:hover
+{
+color:#3d9c5a
+
+}
